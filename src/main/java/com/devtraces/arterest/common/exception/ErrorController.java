@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class ErrorController {
 
 	@ExceptionHandler(BaseException.class)
-	protected ResponseEntity<ApiErrorResponse<?>> handleBaseException(BaseException e) {
+	protected ResponseEntity<ApiErrorResponse> handleBaseException(BaseException e) {
 		return ResponseEntity
 			.status(e.getHttpStatus())
 			.body(ApiErrorResponse.from(e.getErrorCode()));
@@ -18,7 +18,7 @@ public class ErrorController {
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(RuntimeException.class)
-	protected ApiErrorResponse<?> handleRuntimeException(RuntimeException e) {
+	protected ApiErrorResponse handleRuntimeException(RuntimeException e) {
 		log.error(e.getMessage());
 		return ApiErrorResponse.from(ErrorCode.INTERNAL_SERVER_ERROR);
 	}

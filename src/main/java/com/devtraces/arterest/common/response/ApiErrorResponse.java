@@ -8,13 +8,14 @@ import lombok.*;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ApiErrorResponse<T> {
+public class ApiErrorResponse {
+
 	@JsonProperty("errorCode")
 	private String code;
 	@JsonProperty("errorMessage")
 	private String message;
 
-	public static ApiErrorResponse<?> from(ErrorCode errorCode) {
+	public static ApiErrorResponse from(ErrorCode errorCode) {
 		return ApiErrorResponse.builder()
 			.code(errorCode.getCode())
 			.message(errorCode.getMessage())
