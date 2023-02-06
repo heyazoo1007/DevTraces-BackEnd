@@ -48,4 +48,7 @@ public class Rereply extends BaseEntity {
     @JoinColumn(name = "reply_id")
     @ToString.Exclude
     private Reply reply;
+
+    public void setContent(String content){ this.content = content; }
+
 }

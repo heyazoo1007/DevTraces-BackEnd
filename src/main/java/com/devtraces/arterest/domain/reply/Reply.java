@@ -55,10 +55,11 @@ public class Reply extends BaseEntity {
     private Feed feed;
 
     // 1:N mapping with Rereply
-    // User 엔티티 내의 rereplyList와 헷갈리는 것을 방지하기 위함.
     @OneToMany(mappedBy = "reply")
     @ToString.Exclude
-    private List<Rereply> replyRereplyList = new ArrayList<>();
+    private List<Rereply> rereplyList = new ArrayList<>();
+
+    public void setContent(String content){ this.content = content; }
 
 }
 

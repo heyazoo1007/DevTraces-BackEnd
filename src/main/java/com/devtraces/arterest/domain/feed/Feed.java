@@ -49,8 +49,14 @@ public class Feed extends BaseEntity {
     private User user;
 
     // 1:N mapping with Reply
-    // User 엔티티에 존재하는 replyList와 헷갈리는 것을 방지하기 위해서 아래와 같이 네이밍함
     @OneToMany(mappedBy = "feed")
     @ToString.Exclude
-    List<Reply> feedReplyList = new ArrayList<>();
+    List<Reply> replyList = new ArrayList<>();
+
+    public void setContent(String content){ this.content = content; }
+
+    public void setImageLinks(String imageLinks){ this.imageLinks = imageLinks; }
+
+    public void setHashtags(String hashtags){ this.hashtags = hashtags; }
+
 }

@@ -32,8 +32,6 @@ import lombok.ToString;
 import org.hibernate.envers.AuditOverride;
 
 @Getter
-//테스트할 때만 임시로 넣은 세터.
-@Setter
 @Builder
 @ToString
 @AllArgsConstructor
@@ -77,5 +75,20 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Rereply> rereplyList = new ArrayList<>();
+
+    public void setUsername(String username){ this.username = username; }
+
+    public void setNickname(String nickname){ this.nickname = nickname; }
+
+    // 이메일 수정의 경우 추후 필요없으면 제거
+    public void setEmail(String email){ this.email = email; }
+
+    public void setDescription(String description){ this.description = description; }
+
+    public void setPassword(String password){ this.password = password; }
+
+    public void setProfileImageLink(String profileImageLink){ this.profileImageLink = profileImageLink; }
+
+    public void setWithdrawAt(LocalDateTime withdrawAt){ this.withdrawAt = withdrawAt; }
 
 }
