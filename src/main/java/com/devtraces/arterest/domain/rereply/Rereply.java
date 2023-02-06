@@ -1,6 +1,7 @@
-package com.devtraces.arterest.domain;
+package com.devtraces.arterest.domain.rereply;
 
-import com.devtraces.arterest.common.BaseEntity;
+import com.devtraces.arterest.common.domain.BaseEntity;
+import com.devtraces.arterest.domain.user.UserEntity;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,30 +19,27 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.envers.AuditOverride;
 
-@Entity
 @Getter
-@Setter
 @Builder
 @ToString
-@Table(name = "feed_entity")
-@NoArgsConstructor
+@Table(name = "rereply")
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AuditOverride(forClass = BaseEntity.class)
-public class Feed extends BaseEntity {
+@Entity
+public class Rereply extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long replyId;
     private Long feedId;
-
     private Long authorId;
-    private String authorNickname;
     private String content;
-    private String imageLinks;
-    private String hashtags;
 
-    // 1:N mapping with user
+    //1:N mapping with User
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_entity_id")
-    @ToString.Exclude
-    private UserEntity userEntity;
+    private UserEntity user;
 }

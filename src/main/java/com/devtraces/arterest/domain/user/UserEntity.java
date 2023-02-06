@@ -1,8 +1,9 @@
-package com.devtraces.arterest.domain;
+package com.devtraces.arterest.domain.user;
 
-import com.devtraces.arterest.common.BaseEntity;
+import com.devtraces.arterest.common.domain.BaseEntity;
 import com.devtraces.arterest.common.UserSignUpType;
 import com.devtraces.arterest.common.UserStatusType;
+import com.devtraces.arterest.domain.feed.Feed;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,15 +25,14 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.envers.AuditOverride;
 
-@Entity
 @Getter
-@Setter
 @Builder
 @ToString
 @Table(name = "user_entity")
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AuditOverride(forClass = BaseEntity.class)
+@Entity
 public class UserEntity extends BaseEntity {
 
     @Id
@@ -43,7 +44,7 @@ public class UserEntity extends BaseEntity {
     private String email;
     private String description;
 
-    private String password; //암호화 팔요.
+    private String password; // 암호화 필요.
 
     private LocalDateTime withdrawAt;
 

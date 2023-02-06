@@ -1,4 +1,4 @@
-package com.devtraces.arterest.domain;
+package com.devtraces.arterest.domain.rereply;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,6 +1,7 @@
-package com.devtraces.arterest.domain;
+package com.devtraces.arterest.domain.reply;
 
-import com.devtraces.arterest.common.BaseEntity;
+import com.devtraces.arterest.common.domain.BaseEntity;
+import com.devtraces.arterest.domain.user.UserEntity;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,15 +19,14 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.envers.AuditOverride;
 
-@Entity
 @Getter
-@Setter
 @Builder
 @ToString
 @Table(name = "reply")
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AuditOverride(forClass = BaseEntity.class)
+@Entity
 public class Reply extends BaseEntity {
 
     @Id

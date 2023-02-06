@@ -1,4 +1,4 @@
-package com.devtraces.arterest.common;
+package com.devtraces.arterest.common.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;
