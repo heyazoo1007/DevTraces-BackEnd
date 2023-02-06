@@ -1,7 +1,9 @@
 package com.devtraces.arterest.domain.rereply;
 
 import com.devtraces.arterest.common.domain.BaseEntity;
-import com.devtraces.arterest.domain.user.UserEntity;
+import com.devtraces.arterest.domain.reply.Reply;
+import com.devtraces.arterest.domain.user.User;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,31 +17,35 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.envers.AuditOverride;
 
 @Getter
 @Builder
 @ToString
-@Table(name = "rereply")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AuditOverride(forClass = BaseEntity.class)
+@Table(name = "rereply")
 @Entity
 public class Rereply extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rereply_id")
     private Long id;
 
-    private Long replyId;
-    private Long feedId;
-    private Long authorId;
     private String content;
 
-    //1:N mapping with User
+    // 1:N mapping with User
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_entity_id")
-    private UserEntity user;
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private User user;
+
+    // 1:N mapping with Reply
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reply_id")
+    @ToString.Exclude
+    private Reply reply;
 }

@@ -4,9 +4,15 @@ import com.devtraces.arterest.common.domain.BaseEntity;
 import com.devtraces.arterest.common.UserSignUpType;
 import com.devtraces.arterest.common.UserStatusType;
 import com.devtraces.arterest.domain.feed.Feed;
+import com.devtraces.arterest.domain.reply.Reply;
+import com.devtraces.arterest.domain.rereply.Rereply;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,18 +32,21 @@ import lombok.ToString;
 import org.hibernate.envers.AuditOverride;
 
 @Getter
+//테스트할 때만 임시로 넣은 세터.
+@Setter
 @Builder
 @ToString
-@Table(name = "user_entity")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AuditOverride(forClass = BaseEntity.class)
+@Table(name = "user")
 @Entity
-public class UserEntity extends BaseEntity {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userEntityId;
+    @Column(name = "user_id")
+    private Long id;
 
     private String username;
     private String nickname;
@@ -57,14 +66,16 @@ public class UserEntity extends BaseEntity {
     private UserStatusType userStatus;
 
     //1:N mapping
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Set<Feed> feedList = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
-    private List<Feed> feedList = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Reply> replyList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
-    private List<Feed> replyList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
-    private List<Feed> rereplyList = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Rereply> rereplyList = new ArrayList<>();
 
 }
