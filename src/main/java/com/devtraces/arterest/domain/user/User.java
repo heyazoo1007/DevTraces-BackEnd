@@ -66,7 +66,7 @@ public class User extends BaseEntity {
     //1:N mapping
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private Set<Feed> feedList = new LinkedHashSet<>();
+    private List<Feed> feedList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @ToString.Exclude
